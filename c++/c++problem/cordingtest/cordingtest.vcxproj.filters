@@ -24,5 +24,11 @@
     <ClCompile Include="넥슨코테_역수구하기.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="니트로_혜교와 중기의 찬스.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="니트로_직선으로 가장 가까운 도시.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
