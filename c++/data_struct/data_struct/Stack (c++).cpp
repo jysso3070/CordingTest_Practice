@@ -9,15 +9,11 @@ struct QUEUE {
 };
 
 class MyQueue {
-private:
-	QUEUE* head;
-	QUEUE* tail;
 public:
 	MyQueue() {
-		head = new QUEUE; // (QUEUE*)malloc(sizeof(QUEUE));
+		head = new QUEUE;
 		tail = new QUEUE;
 		head->next = tail;
-		tail->next = head;
 	};
 	~MyQueue() {
 		delete head;
@@ -31,37 +27,40 @@ public:
 			return false;
 		}
 	}
-	void Enqueue(QUEUE* newQueue) {
-		tail->next->next = newQueue;
-		tail->next = newQueue;
-		newQueue->next = tail;
+	void Enqueue(QUEUE* newStack) {
+		newStack->next = head->next;
+		head->next = newStack;
 	}
 	QUEUE* Dequeue() {
 		if (IsEmpty() == true) {
 			cout << "Stack is empty \n";
 		}
 		else {
-			QUEUE* q = head->next;
+			QUEUE* pop = head->next;
 			head->next = head->next->next;
-			return q;
+			return pop;
 		}
 	}
+
+private:
+	QUEUE* head;
+	QUEUE* tail;
 };
 
 
 int main() {
-	MyQueue queue;
+	MyQueue s;
 
 	for (int i = 0; i < 10; ++i) {
-		QUEUE* q = new QUEUE;
-		q->data = i;
-		queue.Enqueue(q);
+		QUEUE* st = new QUEUE;
+		st->data = i;
+		s.Enqueue(st);
 	}
 
-	while (queue.IsEmpty() == false) {
-		QUEUE* q = queue.Dequeue();
-		cout << q->data << endl;
-		delete q;
+	while (s.IsEmpty() == false) {
+		QUEUE* pop = s.Dequeue();
+		cout << pop->data << endl;
+		delete pop;
 	}
 }
 

@@ -14,7 +14,7 @@ private:
 	QUEUE* tail;
 public:
 	MyQueue() {
-		head = new QUEUE; // (QUEUE*)malloc(sizeof(QUEUE));
+		head = new QUEUE;
 		tail = new QUEUE;
 		head->next = tail;
 		tail->next = head;
