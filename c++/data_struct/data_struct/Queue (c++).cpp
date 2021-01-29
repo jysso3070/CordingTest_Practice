@@ -3,23 +3,23 @@
 
 using namespace std;
 
-struct QUEUE {
+struct STACK {
 	int data;
-	QUEUE* next;
+	STACK* next;
 };
 
-class MyQueue {
+class MyStack {
 private:
-	QUEUE* head;
-	QUEUE* tail;
+	STACK* head;
+	STACK* tail;
 public:
-	MyQueue() {
-		head = new QUEUE;
-		tail = new QUEUE;
+	MyStack() {
+		head = new STACK; // (QUEUE*)malloc(sizeof(QUEUE));
+		tail = new STACK;
 		head->next = tail;
 		tail->next = head;
 	};
-	~MyQueue() {
+	~MyStack() {
 		delete head;
 		delete tail;
 	};
@@ -31,18 +31,18 @@ public:
 			return false;
 		}
 	}
-	void Enqueue(QUEUE* newQueue) {
+	void PushStack(STACK* newQueue) {
 		tail->next->next = newQueue;
 		tail->next = newQueue;
 		newQueue->next = tail;
 	}
-	QUEUE* Dequeue() {
+	STACK* PopStack() {
 		if (IsEmpty() == true) {
 			cout << "Stack is empty \n";
 		}
 		else {
-			QUEUE* q = head->next;
-			head->next = head->next->next;
+			STACK* q = head->next;
+			head->next = q->next;
 			return q;
 		}
 	}
@@ -50,18 +50,30 @@ public:
 
 
 int main() {
-	MyQueue queue;
+	MyStack queue;
 
 	for (int i = 0; i < 10; ++i) {
-		QUEUE* q = new QUEUE;
+		STACK* q = new STACK;
 		q->data = i;
-		queue.Enqueue(q);
+		queue.PushStack(q);
 	}
-
-	while (queue.IsEmpty() == false) {
-		QUEUE* q = queue.Dequeue();
+	for (int i = 0; i < 5; ++i) {
+		STACK* q = queue.PopStack();
 		cout << q->data << endl;
 		delete q;
 	}
+	cout << "------------" << endl;
+	for (int i = 0; i < 5; ++i) {
+		STACK* q = new STACK;
+		q->data = i;
+		queue.PushStack(q);
+	}
+
+	while (queue.IsEmpty() == false) {
+		STACK* q = queue.PopStack();
+		cout << q->data << endl;
+		delete q;
+	}
+	STACK* q = queue.PopStack();
 }
 

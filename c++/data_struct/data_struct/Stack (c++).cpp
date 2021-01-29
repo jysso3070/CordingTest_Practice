@@ -3,19 +3,22 @@
 
 using namespace std;
 
-struct QUEUE {
+struct STACK {
 	int data;
-	QUEUE* next;
+	STACK* next;
 };
 
-class MyQueue {
+class MyStack {
+private:
+	STACK* head;
+	STACK* tail;
 public:
-	MyQueue() {
-		head = new QUEUE;
-		tail = new QUEUE;
+	MyStack() {
+		head = new STACK;
+		tail = new STACK;
 		head->next = tail;
 	};
-	~MyQueue() {
+	~MyStack() {
 		delete head;
 		delete tail;
 	};
@@ -27,38 +30,35 @@ public:
 			return false;
 		}
 	}
-	void Enqueue(QUEUE* newStack) {
+	void PushStack(STACK* newStack) {
 		newStack->next = head->next;
 		head->next = newStack;
 	}
-	QUEUE* Dequeue() {
+	STACK* PopStack() {
 		if (IsEmpty() == true) {
 			cout << "Stack is empty \n";
 		}
 		else {
-			QUEUE* pop = head->next;
+			STACK* pop = head->next;
 			head->next = head->next->next;
 			return pop;
 		}
 	}
 
-private:
-	QUEUE* head;
-	QUEUE* tail;
 };
 
 
 int main() {
-	MyQueue s;
+	MyStack s;
 
 	for (int i = 0; i < 10; ++i) {
-		QUEUE* st = new QUEUE;
+		STACK* st = new STACK;
 		st->data = i;
-		s.Enqueue(st);
+		s.PushStack(st);
 	}
 
 	while (s.IsEmpty() == false) {
-		QUEUE* pop = s.Dequeue();
+		STACK* pop = s.PopStack();
 		cout << pop->data << endl;
 		delete pop;
 	}
