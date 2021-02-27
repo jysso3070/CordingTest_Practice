@@ -4,7 +4,7 @@
 using namespace std;
 
 
-struct STACK {
+struct QUEUE {
 	int data;
 };
 
@@ -12,12 +12,12 @@ class MyCircularQueue {
 private:
 	int head;
 	int tail;
-	STACK* CircularQueue;
+	QUEUE* CircularQueue;
 	int maxSize;
 
 public:
 	MyCircularQueue(int maxSize) {
-		CircularQueue = new STACK[maxSize];
+		CircularQueue = new QUEUE[maxSize];
 		this->maxSize = maxSize;
 		head = 0;
 		tail = 0;
